@@ -128,7 +128,19 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var rows = this.rows();
+      var sum = 0;
+      if (majorDiagonalColumnIndexAtFirstRow >= 0) {
+        for (var i = 0; i < rows.length - majorDiagonalColumnIndexAtFirstRow; i++) {
+          sum += rows[i][majorDiagonalColumnIndexAtFirstRow + i];
+        }
+      } else {
+        for (var i = 0; i < rows.length + majorDiagonalColumnIndexAtFirstRow; i++) {
+          sum += rows[-majorDiagonalColumnIndexAtFirstRow + i][i];
+        }
+      }
+
+      return sum > 1;
     },
 
     // test if any major diagonals on this board contain conflicts
