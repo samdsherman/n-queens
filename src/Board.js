@@ -100,7 +100,12 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      var rows = this.rows();
+      var sum = 0;
+      for (var i = 0; i < rows.length; i++) {
+        sum += rows[i][colIndex];
+      }
+      return sum > 1;
     },
 
     // test if any columns on this board contain conflicts
