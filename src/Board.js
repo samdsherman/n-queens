@@ -87,7 +87,10 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      var rows = this.rows();
+      return rows.some((row, rowIndex) => {
+        return this.hasRowConflictAt(rowIndex);
+      });
     },
 
 
