@@ -166,8 +166,8 @@
       var rows = this.rows();
       var sum = 0;
       if (minorDiagonalColumnIndexAtFirstRow < rows.length) {
-        for (var i = 0; i < rows.length; ++i) {
-        //out of bounds
+        for (var i = 0; i < rows.length && minorDiagonalColumnIndexAtFirstRow - i >= 0; ++i) {
+        // ensuring mc is less than rows and not out of bounds
           sum += rows[i][minorDiagonalColumnIndexAtFirstRow - i];
         }
       } else {    
@@ -183,6 +183,13 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      var n = this.get('n');
+      for (var i = 0; i < 2 * n - 1; i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
