@@ -136,6 +136,7 @@
         }
       } else {
         for (var i = 0; i < rows.length + majorDiagonalColumnIndexAtFirstRow; i++) {
+        //out of bounds
           sum += rows[-majorDiagonalColumnIndexAtFirstRow + i][i];
         }
       }
@@ -162,12 +163,26 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var rows = this.rows();
+      var sum = 0;
+      if (minorDiagonalColumnIndexAtFirstRow < rows.length) {
+        for (var i = 0; i < rows.length; ++i) {
+        //out of bounds
+          sum += rows[i][minorDiagonalColumnIndexAtFirstRow - i];
+        }
+      } else {    
+        // out of bounds
+        // minorDiagonalColumnIndexAtFirstRow >= rows.length
+        for (var i = minorDiagonalColumnIndexAtFirstRow - rows.length + 1; i < rows.length; i++) {
+        // once mc >= rows..think about this one.
+          sum += rows[i][minorDiagonalColumnIndexAtFirstRow - i];
+        }
+      }
+      return sum > 1;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
@@ -184,3 +199,44 @@
   };
 
 }());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
